@@ -6,7 +6,7 @@ import lombok.Data;
 public class Product implements Identifiable<Long> {
     private Long id;
     private String url;
-
+    private String state;
     public Product() {
     }
 

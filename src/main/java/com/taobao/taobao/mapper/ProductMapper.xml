@@ -4,12 +4,14 @@
     <resultMap id="BaseResultMap" type="com.taobao.taobao.entity.Product">
             <id column="id" property="id" jdbcType="VARCHAR"/>
             <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="table">product</sql>
     <sql id="Base_Column_List">
             `id`,
-            `url`
+            `url`,
+            `state`
     </sql>
     <sql id="Base_Where_Clause">
         <where>
@@ -20,6 +22,9 @@
                     <if test="url != null and url != ''">
                         AND `url`=#{url}
                     </if>
+                <if test="state != null and state != ''">
+                    AND `state`=#{state}
+                </if>
             </trim>
         </where>
         <if test="offset == null and limit != null">
@@ -100,5 +105,15 @@
             </if>
         </set>
         WHERE id=#{id}
+    </update>
+    <update id="updateByUrl" parameterType="com.taobao.taobao.entity.Product">
+        UPDATE
+        <include refid="table"/>
+        <set>
+            <if test="state != null and state != ''">
+                `state`=#{state},
+            </if>
+        </set>
+        WHERE url=#{url}
     </update>
 </mapper>
