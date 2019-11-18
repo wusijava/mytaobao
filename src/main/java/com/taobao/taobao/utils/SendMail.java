@@ -81,7 +81,7 @@ public class SendMail {
          */
         msg.setRecipient(MimeMessage.RecipientType.TO,new InternetAddress(recipientAddress));
         //设置邮件主题
-        msg.setSubject("下架产品提醒","UTF-8");
+        msg.setSubject("淘宝产品监控邮件","UTF-8");
         //设置邮件正文
         msg.setContent(text, "text/html;charset=UTF-8");
         //设置邮件的发送时间,默认立即发送

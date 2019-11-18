@@ -11,7 +11,8 @@
     <sql id="Base_Column_List">
             `id`,
             `url`,
-            `state`
+            `state`,
+            `type`
     </sql>
     <sql id="Base_Where_Clause">
         <where>
@@ -106,7 +107,7 @@
         </set>
         WHERE id=#{id}
     </update>
-    <update id="updateByUrl" parameterType="com.taobao.taobao.entity.Product">
+    <update id="updateByUrl" >
         UPDATE
         <include refid="table"/>
         <set>
@@ -116,4 +117,8 @@
         </set>
         WHERE url=#{url}
     </update>
+    <select id="getStateByUrl" resultMap="BaseResultMap">
+        select state from  product where url=#{url}
+    </select>
+
 </mapper>

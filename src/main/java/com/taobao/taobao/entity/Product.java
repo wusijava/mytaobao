@@ -7,9 +7,17 @@ public class Product implements Identifiable<Long> {
     private Long id;
     private String url;
     private String state;
+    private String type;
     public Product() {
     }
 
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getState() {
+        return state;
+    }
 
     @Override
     public Long getId() {

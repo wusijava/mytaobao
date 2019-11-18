@@ -20,7 +20,7 @@ public class ProductController {
 
     @RequestMapping("/")
     @ResponseBody
-    @Scheduled(cron = "0 0 16-23 * * ?")
+    @Scheduled(cron = "0 0 8,12,16,20 * * ?")
     public void getlist() throws Exception {
         List<Product> list = productMapper.selectAll();
         for (Product pro : list) {
@@ -35,14 +35,33 @@ public class ProductController {
             }
             //打印页面内容
             //String json= JSON.toJSONString(html);
+            //获取线上商品状态
             String value = GetJsonValue(html, "online");
-           //System.out.println(value);
+            //获取数据库商品状态
+            String sqlvalue=productMapper.getStateByUrl(url).getState();
             String newvalue=value.trim();
-            if("false".equalsIgnoreCase(newvalue)){
-                //System.out.println("测试定时任务！");
+            if ("false".equalsIgnoreCase(newvalue)&&"online".equalsIgnoreCase(sqlvalue)){
+                //更新数据库商品状态
+                productMapper.updateByUrl(url,"offline");
+                //发送邮件提醒
                 SendMail.sendQQMail("吴老板:"+url+"的商品下架了，请尽快处理！");
             }
-            //System.out.println(value);
+            if ("true,".equalsIgnoreCase(newvalue)&&"offline".equalsIgnoreCase(sqlvalue)){
+                //更新数据库商品状态
+                productMapper.updateByUrl(url,"online");
+                //发送邮件提醒
+                SendMail.sendQQMail("吴老板:"+url+"的商品上架了，请尽快在店内上架！");
+            }
+
+            /*if("false".equalsIgnoreCase(newvalue)){
+                Object o = RedisUtil.get(url);
+                if(o==null){
+                    RedisUtil.set(url, url);
+                    SendMail.sendQQMail("吴老板:"+url+"的商品下架了，请尽快处理！");
+                }
+
+
+            }*/
         }
 
     }
