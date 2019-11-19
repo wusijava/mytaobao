@@ -52,16 +52,7 @@ public class ProductController {
                 //发送邮件提醒
                 SendMail.sendQQMail("吴老板:"+url+"的商品上架了，请尽快在店内上架！");
             }
-
-            /*if("false".equalsIgnoreCase(newvalue)){
-                Object o = RedisUtil.get(url);
-                if(o==null){
-                    RedisUtil.set(url, url);
-                    SendMail.sendQQMail("吴老板:"+url+"的商品下架了，请尽快处理！");
-                }
-
-
-            }*/
+            
         }
 
     }
@@ -72,11 +63,5 @@ public class ProductController {
         String result=jsonStr.substring(index+18, index+24);
         return result;
     }
-    public static String Getname(String jsonStr, String key)
-    {
 
-        int index=jsonStr.indexOf(key);
-        String result=jsonStr.substring(index+18, index+24);
-        return result;
-    }
 }
