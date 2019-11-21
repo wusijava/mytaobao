@@ -29,6 +29,7 @@ public class ProductController {
            // System.out.println(url);
             String html = null;
             try {
+                //增加延迟时间
                 html = Jsoup.connect(url).timeout(200000).execute().body();
                // System.out.println(html);
             } catch (IOException e) {
