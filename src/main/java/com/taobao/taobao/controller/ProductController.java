@@ -24,11 +24,12 @@ public class ProductController {
     public void getlist() throws Exception {
         List<Product> list = productMapper.selectAll();
         for (Product pro : list) {
+            Thread.sleep(100000);
             String url = pro.getUrl();
            // System.out.println(url);
             String html = null;
             try {
-                html = Jsoup.connect(url).execute().body();
+                html = Jsoup.connect(url).timeout(200000).execute().body();
                // System.out.println(html);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -52,7 +53,7 @@ public class ProductController {
                 //发送邮件提醒
                 SendMail.sendQQMail("吴老板:"+url+"的商品上架了，请尽快在店内上架！");
             }
-            
+
         }
 
     }
