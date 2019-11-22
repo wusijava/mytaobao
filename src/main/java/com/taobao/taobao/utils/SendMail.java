@@ -15,7 +15,7 @@ public class SendMail {
     //发件人地址
     public static String senderAddress = "513936307@qq.com";
     //收件人地址
-    public static String recipientAddress = "513936307@qq.com";
+    public static String recipientAddress = "timary@qq.com";
     //发件人账户名
     public static String senderAccount = "wusi";
     //发件人账户密码
