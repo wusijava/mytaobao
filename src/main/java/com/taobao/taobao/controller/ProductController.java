@@ -52,7 +52,7 @@ public class ProductController {
                 //更新数据库商品状态
                 productMapper.updateByUrl(url,"online");
                 //发送邮件提醒
-                SendMail.sendQQMail("吴老板:"+url+"的商品上架了，请尽快在店内上架！!!");
+                SendMail.sendQQMail("吴老板:"+url+"的商品上架了，请尽快在店内上架！");
             }
 
         }
