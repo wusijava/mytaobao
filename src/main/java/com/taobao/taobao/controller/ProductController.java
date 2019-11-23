@@ -22,7 +22,7 @@ public class ProductController {
 
     @RequestMapping("/run")
     @ResponseBody
-    @Scheduled(cron = "0 0 10 * * ?")
+    @Scheduled(cron = "0 0 22 * * ?")
     public void getlist() throws Exception {
         List<Product> list = productMapper.selectAll();
         for (Product pro : list) {
