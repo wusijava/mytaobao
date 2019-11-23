@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -18,7 +20,7 @@ public class ProductController {
     @Autowired
     private ProductMapper productMapper;
 
-    @RequestMapping("/")
+    @RequestMapping("/run")
     @ResponseBody
     @Scheduled(cron = "0 0 10 * * ?")
     public void getlist() throws Exception {
@@ -42,6 +44,9 @@ public class ProductController {
             //获取数据库商品状态
             String sqlvalue=productMapper.getStateByUrl(url).getState();
             String newvalue=value.trim();
+            //加入每日任务提醒 确保程序已启动
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd ");//设置日期格式
+            SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!");
             if ("false".equalsIgnoreCase(newvalue)&&"online".equalsIgnoreCase(sqlvalue)){
                 //更新数据库商品状态
                 productMapper.updateByUrl(url,"offline");
