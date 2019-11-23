@@ -24,6 +24,8 @@ public class ProductController {
     @ResponseBody
     @Scheduled(cron = "0 0 22 * * ?")
     public void getlist() throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");//设置日期格式
+        SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!");
         List<Product> list = productMapper.selectAll();
         for (Product pro : list) {
             Thread.sleep(100000);
@@ -45,8 +47,8 @@ public class ProductController {
             String sqlvalue=productMapper.getStateByUrl(url).getState();
             String newvalue=value.trim();
             //加入每日任务提醒 确保程序已启动
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");//设置日期格式
-            SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!");
+
+
             if ("false".equalsIgnoreCase(newvalue)&&"online".equalsIgnoreCase(sqlvalue)){
                 //更新数据库商品状态
                 productMapper.updateByUrl(url,"offline");
