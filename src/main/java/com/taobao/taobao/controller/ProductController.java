@@ -45,19 +45,19 @@ public class ProductController {
             String sqlvalue=productMapper.getStateByUrl(url).getState();
             String newvalue=value.trim();
             //加入每日任务提醒 确保程序已启动
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd ");//设置日期格式
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");//设置日期格式
             SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!");
             if ("false".equalsIgnoreCase(newvalue)&&"online".equalsIgnoreCase(sqlvalue)){
                 //更新数据库商品状态
                 productMapper.updateByUrl(url,"offline");
                 //发送邮件提醒
-                SendMail.sendQQMail("吴老板:"+url+"的商品下架了，请尽快处理！");
+                SendMail.sendQQMail(df.format(new Date()+"----吴老板:"+url+"的商品下架了，请尽快处理！"));
             }
             if ("true,".equalsIgnoreCase(newvalue)&&"offline".equalsIgnoreCase(sqlvalue)){
                 //更新数据库商品状态
                 productMapper.updateByUrl(url,"online");
                 //发送邮件提醒
-                SendMail.sendQQMail("吴老板:"+url+"的商品上架了，请尽快在店内上架！");
+                SendMail.sendQQMail(new Date()+"----吴老板:"+url+"的商品上架了，请尽快在店内上架！");
             }
 
         }
