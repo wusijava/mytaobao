@@ -1,14 +1,17 @@
 package com.taobao.taobao.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.taobao.taobao.entity.Product;
 import com.taobao.taobao.mapper.ProductMapper;
 import com.taobao.taobao.utils.SendMail;
+import com.taobao.taobao.utils.WeatherUtils;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -37,16 +40,17 @@ public class ProductController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //打印页面内容
-            //String json= JSON.toJSONString(html);
+
             //获取线上商品状态
             String value = GetJsonValue(html, "online");
             //获取数据库商品状态
             String sqlvalue=productMapper.getStateByUrl(url).getState();
             String newvalue=value.trim();
+            //加入天气情况
+
             //加入每日任务提醒 确保程序已启动
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");//设置日期格式
-            SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!");
+            SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!"+"\n"+ WeatherUtils.getWeather());
             if ("false".equalsIgnoreCase(newvalue)&&"online".equalsIgnoreCase(sqlvalue)){
                 //更新数据库商品状态
                 productMapper.updateByUrl(url,"offline");

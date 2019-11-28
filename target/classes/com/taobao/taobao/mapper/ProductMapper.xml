@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taobao.taobao.mapper.ProductMapper">
+    <resultMap id="BaseResultMap" type="com.taobao.taobao.entity.Product">
+            <id column="id" property="id" jdbcType="VARCHAR"/>
+            <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="table">product</sql>
+    <sql id="Base_Column_List">
+            `id`,
+            `url`,
+            `state`,
+            `type`
+    </sql>
+    <sql id="Base_Where_Clause">
+        <where>
+            <trim prefixOverrides="and">
+                    <if test="id != null and id != ''">
+                        AND `id`=#{id}
+                    </if>
+                    <if test="url != null and url != ''">
+                        AND `url`=#{url}
+                    </if>
+                <if test="state != null and state != ''">
+                    AND `state`=#{state}
+                </if>
+            </trim>
+        </where>
+        <if test="offset == null and limit != null">
+            limit #{limit}
+        </if>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </sql>
+
+    <!-- 查询总数 -->
+    <select id="selectCount" resultType="java.lang.Long" parameterType="java.util.Map">
+        SELECT count(id)
+        FROM
+        <include refid="table"/>
+        <include refid="Base_Where_Clause"/>
+    </select>
+
+    <!-- 查询 -->
+    <select id="select" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="table"/>
+        <include refid="Base_Where_Clause"/>
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="table"/>
+        <include refid="Base_Where_Clause"/>
+    </select>
+    <insert id="insert" parameterType="com.taobao.taobao.entity.Product" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO
+        <include refid="table"/>
+        (
+            `id`,
+            `url`
+        )
+        VALUES(
+            #{id},
+            #{url}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="java.util.List" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO
+        <include refid="table"/>
+        (
+            `id`,
+            `url`
+        )
+        VALUES
+        <foreach collection="list" item="cm" index="index" separator=",">
+            (
+            #{cm.id},
+            #{cm.url}
+            )
+        </foreach>
+    </insert>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="table"/>
+        WHERE id=#{id}
+    </select>
+
+    <update id="updateById" parameterType="com.taobao.taobao.entity.Product">
+        UPDATE
+        <include refid="table"/>
+        <set>
+            <if test="url != null and url != ''">
+                 `url`=#{url},
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <update id="updateByUrl" >
+        UPDATE
+        <include refid="table"/>
+        <set>
+            <if test="state != null and state != ''">
+                `state`=#{state},
+            </if>
+        </set>
+        WHERE url=#{url}
+    </update>
+    <select id="getStateByUrl" resultMap="BaseResultMap">
+        select state from  product where url=#{url}
+    </select>
+
+</mapper>
