@@ -24,9 +24,10 @@ public class ProductServiceImpl  extends BaseMybatisServiceImpl<Product,Long> im
     }
 
     @Override
-    public void updateByUrl(String url, String state) {
-        productMapper.updateByUrl(url,state);
+    public void updateByUrl(String url, String type) {
+        productMapper.updateByUrl(url,type);
     }
+
 
     @Override
     public <Q extends Product> Page<Product> queryPage(Q query, SpringDataWebProperties.Pageable pageable) {

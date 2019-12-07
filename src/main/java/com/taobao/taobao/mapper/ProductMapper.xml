@@ -111,14 +111,14 @@
         UPDATE
         <include refid="table"/>
         <set>
-            <if test="state != null and state != ''">
-                `state`=#{state},
+            <if test="url != null and url != ''">
+                `type`=#{type},
             </if>
         </set>
         WHERE url=#{url}
     </update>
     <select id="getStateByUrl" resultMap="BaseResultMap">
-        select state from  product where url=#{url}
+        select * from  product where url=#{url}
     </select>
 
 </mapper>
