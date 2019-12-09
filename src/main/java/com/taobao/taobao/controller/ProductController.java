@@ -1,6 +1,5 @@
 package com.taobao.taobao.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.taobao.taobao.entity.Product;
 import com.taobao.taobao.mapper.ProductMapper;
 import com.taobao.taobao.utils.SendMail;
@@ -11,7 +10,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -25,7 +23,7 @@ public class ProductController {
 
     @RequestMapping("/run")
     @ResponseBody
-    @Scheduled(cron = "0 0 22 * * ?")
+    @Scheduled(cron = "0 0 12 * * ?")
     public void getlist() throws Exception {
         //加入每日任务提醒 确保程序已启动
         //加入天气情况
@@ -33,15 +31,15 @@ public class ProductController {
         SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!"+"\n"+ WeatherUtils.getWeather());
         List<Product> list = productMapper.selectAll();
         for (Product pro : list) {
-          //  Thread.sleep(100000);
+            Thread.sleep(100000);
             String url = pro.getUrl();
            // System.out.println(url);
             String html = null;
             try {
                 //增加延迟时间  线上
-                //html = Jsoup.connect(url).timeout(200000).execute().body();
+                html = Jsoup.connect(url).timeout(200000).execute().body();
                 //本地
-                html = Jsoup.connect(url).execute().body();
+                //html = Jsoup.connect(url).execute().body();
                // System.out.println(html);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -59,13 +57,13 @@ public class ProductController {
                 //更新数据库商品状态
                 productMapper.updateByUrl(url,"offline");
                 //发送邮件提醒
-                SendMail.sendQQMail(df.format(new Date()+"----吴老板:"+type+"的商品下架了，请尽快处理！"));
+                SendMail.sendQQMail(df.format(new Date())+"----吴老板:"+type+"的商品下架了，请尽快处理！");
             }
             if ("true,".equalsIgnoreCase(newvalue)&&"offline".equalsIgnoreCase(sqlvalue)){
                 //更新数据库商品状态
                 productMapper.updateByUrl(url,"online");
                 //发送邮件提醒
-                SendMail.sendQQMail(new Date()+"----吴老板:"+type+"的商品上架了，请尽快在店内上架！");
+                SendMail.sendQQMail(df.format(new Date())+"----吴老板:"+type+"的商品上架了，请尽快在店内上架！");
             }
 
         }

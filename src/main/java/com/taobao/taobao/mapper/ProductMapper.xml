@@ -26,6 +26,9 @@
                 <if test="state != null and state != ''">
                     AND `state`=#{state}
                 </if>
+                <if test="type != null and type != ''">
+                    AND `type`=#{type}
+                </if>
             </trim>
         </where>
         <if test="offset == null and limit != null">
@@ -111,8 +114,8 @@
         UPDATE
         <include refid="table"/>
         <set>
-            <if test="url != null and url != ''">
-                `type`=#{type},
+            <if test="state != null and state != ''">
+                `state`=#{state},
             </if>
         </set>
         WHERE url=#{url}

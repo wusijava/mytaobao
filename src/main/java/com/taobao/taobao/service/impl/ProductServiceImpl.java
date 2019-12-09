@@ -24,8 +24,8 @@ public class ProductServiceImpl  extends BaseMybatisServiceImpl<Product,Long> im
     }
 
     @Override
-    public void updateByUrl(String url, String type) {
-        productMapper.updateByUrl(url,type);
+    public void updateByUrl(String url, String state) {
+        productMapper.updateByUrl(url,state);
     }
 
 

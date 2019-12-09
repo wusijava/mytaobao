@@ -10,5 +10,5 @@ import com.taobao.taobao.entity.Product;
 
 public interface ProductService extends BaseService<Product,Long> {
     Product getStateByUrl(String Url);
-    void updateByUrl(String url,String type);
+    void updateByUrl(String url,String state);
 }
