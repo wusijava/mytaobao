@@ -28,9 +28,10 @@ public class ProductController {
         //加入每日任务提醒 确保程序已启动
         //加入天气情况
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");//设置日期格式
-        SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!"+"\n"+ WeatherUtils.getWeather());
         List<Product> list = productMapper.selectAll();
+        int i=0;
         for (Product pro : list) {
+            i++;
             Thread.sleep(100000);
             String url = pro.getUrl();
            // System.out.println(url);
@@ -65,7 +66,7 @@ public class ProductController {
                 //发送邮件提醒
                 SendMail.sendQQMail(df.format(new Date())+"----吴老板:"+type+"的商品上架了，请尽快在店内上架！");
             }
-
+            SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!"+"\n"+"共计扫描商品"+i+"次"+ WeatherUtils.getWeather());
         }
 
     }
