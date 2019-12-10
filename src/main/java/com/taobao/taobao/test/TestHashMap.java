@@ -53,6 +53,6 @@ public class TestHashMap {
             map1.put(i, i);
         }
         long s6 = System.currentTimeMillis();
-        System.out.println("初始化容量5000000，耗时 ： " + (s6 - s5));
+        System.out.println("初始化容量10000000，耗时 ： " + (s6 - s5));
     }
 }
