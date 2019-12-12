@@ -32,7 +32,7 @@ public class ProductController {
         int i=0;
         for (Product pro : list) {
             i++;
-            Thread.sleep(100000);
+          Thread.sleep(100000);
             String url = pro.getUrl();
            // System.out.println(url);
             String html = null;
@@ -40,8 +40,8 @@ public class ProductController {
                 //增加延迟时间  线上
                 html = Jsoup.connect(url).timeout(200000).execute().body();
                 //本地
-                //html = Jsoup.connect(url).execute().body();
-               // System.out.println(html);
+               // html = Jsoup.connect(url).execute().body();
+               //System.out.println(html);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -66,9 +66,8 @@ public class ProductController {
                 //发送邮件提醒
                 SendMail.sendQQMail(df.format(new Date())+"----吴老板:"+type+"的商品上架了，请尽快在店内上架！");
             }
-            SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!"+"\n"+"共计扫描商品"+i+"次"+ WeatherUtils.getWeather());
         }
-
+        SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!"+"\n"+"共计扫描商品"+i+"次!"+ WeatherUtils.getWeather());
     }
     public static String GetJsonValue(String jsonStr, String key)
     {
