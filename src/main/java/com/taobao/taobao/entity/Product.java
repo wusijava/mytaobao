@@ -2,12 +2,15 @@ package com.taobao.taobao.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class Product implements Identifiable<Long> {
     private Long id;
     private String url;
     private String state;
     private String type;
+    private Date updatetime;
     public Product() {
     }
 
@@ -43,4 +46,5 @@ public class Product implements Identifiable<Long> {
     public void setType(String type) {
         this.type = type;
     }
-}
+
+        }
