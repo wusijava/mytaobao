@@ -1,7 +1,9 @@
 D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\exception\BizException.java
+D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\utils\WeatherFastJsonUtils.java
 D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\utils\WeatherUtils.java
 D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\base\service\impl\BaseServiceImpl.java
 D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\utils\DateUtil.java
+D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\test\testFastJson.java
 D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\test\testGetName.java
 D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\utils\IoUtils.java
 D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\base\service\impl\BaseMybatisServiceImpl.java
@@ -19,6 +21,7 @@ D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\base\dao\jpa\BaseReposito
 D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\service\ProductService.java
 D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\entity\User.java
 D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\entity\Identifiable.java
+D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\test\TestHashMap.java
 D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\controller\ProductController.java
 D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\service\impl\ProductServiceImpl.java
 D:\workspaces\mytaobao\src\main\java\com\taobao\taobao\entity\Product.java

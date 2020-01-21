@@ -36,14 +36,12 @@ public class ProductController {
             i++;
            Thread.sleep(80000);
             String url = pro.getUrl();
-           // System.out.println(url);
             String html = null;
             try {
                 //增加延迟时间  线上
                 html = Jsoup.connect(url).timeout(80000).execute().body();
                 //本地
-               // html = Jsoup.connect(url).execute().body();
-               //System.out.println(html);
+               //html = Jsoup.connect(url).execute().body();
             } catch (IOException e) {
                 log.error("执行失败",e.getMessage());
                 e.printStackTrace();

@@ -1,4 +1,5 @@
 com\taobao\taobao\utils\ApplicationContextProvider.class
+com\taobao\taobao\test\TestHashMap.class
 com\taobao\taobao\utils\BeanUtil.class
 com\taobao\taobao\exception\BizException.class
 com\taobao\taobao\entity\Product.class
@@ -19,6 +20,8 @@ com\taobao\taobao\base\dao\mybatis\BaseMapper.class
 com\taobao\taobao\service\impl\ProductServiceImpl.class
 com\taobao\taobao\utils\IoUtils.class
 com\taobao\taobao\controller\LoginController.class
+com\taobao\taobao\utils\WeatherFastJsonUtils.class
+com\taobao\taobao\test\testFastJson.class
 com\taobao\taobao\utils\EncryptDecrypt.class
 com\taobao\taobao\service\ProductService.class
 com\taobao\taobao\utils\RedisUtil.class
