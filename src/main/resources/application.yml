@@ -32,7 +32,6 @@ mail:
 
 server:
   port: 8081
-  tomcat:
-    max-http-form-post-size: -1
+
 mybatis:
   mapper-locations: classpath:com/taobao/taobao/*Mapper.xml
