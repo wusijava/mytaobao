@@ -34,7 +34,7 @@ public class ProductController {
         int i=0;
         for (Product pro : list) {
             i++;
-           Thread.sleep(100000);
+           Thread.sleep(200000);
             String url = pro.getUrl();
             String html = null;
             try {
