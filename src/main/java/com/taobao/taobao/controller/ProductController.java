@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
@@ -70,9 +69,9 @@ public class ProductController {
                 //发送邮件提醒
                 SendMail.sendQQMail(df.format(new Date())+"----吴老板:"+type+"的商品上架了，请尽快在店内上架！");
             }
-            SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!"+"\n"+"共计扫描商品"+i+"次！"+ WeatherUtils.getWeather());
-        }
 
+        }
+        SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!"+"\n"+"共计扫描商品"+i+"次！"+ WeatherUtils.getWeather());
     }
     public static String GetJsonValue(String jsonStr, String key)
     {   //log.error("入参---->:{}"+jsonStr);
