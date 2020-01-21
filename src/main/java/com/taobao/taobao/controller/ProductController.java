@@ -25,7 +25,7 @@ public class ProductController {
 
     @RequestMapping(value = "/run" )
     @ResponseBody
-    @Scheduled(cron = "0 0 12 * * ?")
+    @Scheduled(cron = "0 0 19 * * ?")
     public void getlist() throws Exception {
         //加入每日任务提醒 确保程序已启动
         //加入天气情况
