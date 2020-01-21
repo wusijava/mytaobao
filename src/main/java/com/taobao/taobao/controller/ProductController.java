@@ -39,7 +39,7 @@ public class ProductController {
             String html = null;
             try {
                 //增加延迟时间  线上
-                html = Jsoup.connect(url).timeout(100000).execute().body();
+                html = Jsoup.connect(url).timeout(150000).execute().body();
                 //本地
                //html = Jsoup.connect(url).execute().body();
             } catch (IOException e) {
