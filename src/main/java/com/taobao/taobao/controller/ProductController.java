@@ -4,11 +4,13 @@ import com.taobao.taobao.entity.Product;
 import com.taobao.taobao.mapper.ProductMapper;
 import com.taobao.taobao.utils.SendMail;
 import com.taobao.taobao.utils.WeatherUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
@@ -17,11 +19,12 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class ProductController {
     @Autowired
     private ProductMapper productMapper;
 
-    @RequestMapping("/run")
+    @RequestMapping(value = "/run" )
     @ResponseBody
     @Scheduled(cron = "0 0 12 * * ?")
     public void getlist() throws Exception {
@@ -32,17 +35,18 @@ public class ProductController {
         int i=0;
         for (Product pro : list) {
             i++;
-            Thread.sleep(100000);
+           Thread.sleep(80000);
             String url = pro.getUrl();
            // System.out.println(url);
             String html = null;
             try {
                 //增加延迟时间  线上
-                html = Jsoup.connect(url).timeout(200000).execute().body();
+                html = Jsoup.connect(url).timeout(80000).execute().body();
                 //本地
-                //html = Jsoup.connect(url).execute().body();
-               // System.out.println(html);
+               // html = Jsoup.connect(url).execute().body();
+               //System.out.println(html);
             } catch (IOException e) {
+                log.error("执行失败",e.getMessage());
                 e.printStackTrace();
             }
 
@@ -71,8 +75,7 @@ public class ProductController {
         SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!"+"\n"+"共计扫描商品"+i+"次"+ WeatherUtils.getWeather());
     }
     public static String GetJsonValue(String jsonStr, String key)
-    {
-
+    {   //log.error("入参---->:{}"+jsonStr);
         int index=jsonStr.indexOf(key);
         String result=jsonStr.substring(index+18, index+24);
         return result;
