@@ -25,10 +25,10 @@ spring:
         exclusions: '*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*'
         session-stat-enable: true
 mail:
-  hostname:smtp.qq.com
-  username:wusi
-  password:wusi20150402
-  port:465
+   hostname:smtp.qq.com
+   username:wusi
+   password:wusi20150402
+   port:465
 
 server:
   port: 8081

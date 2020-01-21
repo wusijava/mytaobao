@@ -41,7 +41,7 @@ public class SendMail {
         Authenticator auth = new Authenticator() {
             public PasswordAuthentication getPasswordAuthentication() {
                 // 密码验证
-                return new PasswordAuthentication("513936307", "izppqxekkmvtbjai");
+                return new PasswordAuthentication("513936307", "gomlsnqhyiekbjba");
 
             }};
 
