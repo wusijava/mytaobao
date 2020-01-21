@@ -70,9 +70,9 @@ public class ProductController {
                 //发送邮件提醒
                 SendMail.sendQQMail(df.format(new Date())+"----吴老板:"+type+"的商品上架了，请尽快在店内上架！");
             }
-
+            SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!"+"\n"+"共计扫描商品"+i+"次！"+ WeatherUtils.getWeather());
         }
-        SendMail.sendQQMail(df.format(new Date())+"的监控任务已启动!"+"\n"+"共计扫描商品"+i+"次"+ WeatherUtils.getWeather());
+
     }
     public static String GetJsonValue(String jsonStr, String key)
     {   //log.error("入参---->:{}"+jsonStr);
